@@ -1,0 +1,10 @@
+{
+  "name": "TP5",
+  "version": "1.0.0",
+  "dependencies": {
+    "express": "4.12.3",
+    "express-session": "1.10.4",
+    "body-parser": "1.12.2",
+    "jade": "1.9.2"
+  }
+}
