@@ -1,0 +1,68 @@
+<!doctype html>
+<html manifest="manifest.appcache">
+<head>
+    <title>Socket.IO chat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #messages li:nth-child(odd) { background: #eee; }
+    </style>
+</head>
+<body>
+<ul id="messages"></ul>
+<form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+</form>
+</body>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    function showMessage(msg) {
+        $('#messages').append($('<li>').text(msg));
+    }
+
+    window.onload = function() {
+
+        var chatData = JSON.parse(localStorage.getItem('chat-data'));
+        if (!chatData) {
+            localStorage.setItem('chat-data', JSON.stringify([]));
+        } else {
+            chatData.forEach(function(msg) {
+                showMessage(msg);
+            });
+        }
+
+        var socket = io();
+
+        // Envoyer le pseudo
+        var pseudo = prompt('Pseudo ? ');
+        socket.emit('new user', pseudo);
+
+        // Récupérer les données
+        socket.on('new chat message', function(msg) {
+            console.log('new message received ! :', msg);
+            // Get item
+            var chatData = localStorage.getItem('chat-data');
+            // Parse to Javascript object
+            chatData = JSON.parse(chatData);
+            // Push to the array
+            chatData.push(msg);
+            // Set to local storage as JSON/string
+            localStorage.setItem('chat-data', JSON.stringify(chatData));
+            showMessage(msg);
+        });
+
+        // Envoyer les données
+        $('form').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+        });
+    };
+</script>
+</html>
