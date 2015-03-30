@@ -19,3 +19,15 @@ Academic exercices for the Node.js course
 - jade
 
 This project has a `package.json` file, just use `npm install`
+
+## TP6-MongoDB
+
+### Dependencies
+- express
+- mongoose
+
+`npm install`
+
+/!\ Don't forget to install MongoDB /!\
+
+You have to launch  the `mongod` command to successfully connect your node server with mongoose
