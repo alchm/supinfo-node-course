@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="DemoApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My first Angular App</title>
+</head>
+<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<body ng-controller="DemoCtrl">
+    <h1>Angular Demo !</h1>
+    <h2>Expression :</h2>
+    <p>2 + 3 expression : {{ 2 + 3 }}</p>
+    <br>
+    <div>
+        <h2>Automatic update / variable creation :</h2>
+        <div ng-model="MyModel">
+            <input type="text" ng-model="MyModel.name" />
+            <input type="text" ng-model="MyModel.desc" />
+
+            <p>Name : <strong>{{ MyModel.name }}</strong></p>
+            <p>Description : <span>{{ MyModel.desc }}</span></p>
+        </div>
+        <br>
+    </div>
+    <div>
+        <h2>Scope binding :</h2>
+        <div ng-model="elToPush">
+            <input type="text" ng-model="elToPush.name"/>
+            <input type="text" ng-model="elToPush.desc"/>
+            <button ng-click="pushEl(elToPush)">Push</button>
+        </div>
+        <table>
+            <br>
+            <tr>
+                <td><strong>Name</strong></td>
+                <td><strong>Description</strong></td>
+            </tr>
+            <tr ng-repeat="el in elements">
+                <td>{{ el.name }}</td>
+                <td>{{ el.desc }}</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

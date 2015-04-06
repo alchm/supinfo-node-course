@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="ProductApp"> <!-- Product Application -->
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>My first Angular App</title>
+</head>
+<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="node_modules/angular/angular.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="models.js"></script>
+<script type="text/javascript" src="controllers.js"></script>
+<body ng-controller="ProductCtrl"> <!-- Product Controller -->
+    <div class="container">
+        <div class="page-header">
+            <h1>Product application ! <small>Angular MVC Overview</small></h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 well">
+                <form ng-model="newProduct">
+                    <div class="form-group">
+                        <label for="name"> Name :
+                            <input id="name" class="form-control" type="text" ng-model="newProduct.name">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="desc"> Description :
+                            <input id="desc" class="form-control" type="text" ng-model="newProduct.description">
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="price"> Price :
+                            <input id="price" class="form-control" type="text" ng-model="newProduct.price">
+                        </label>
+                    </div>
+                    <button class="btn btn-success" ng-click="addProduct(newProduct)">Add product</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>
+                    <tr ng-repeat="product in products">
+                        <td><strong>{{ product.name }}</strong></td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td><button class="btn btn-danger" ng-click="deleteProduct(product)">X</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</body><!-- / Product Controller -->
+</html><!-- / Product Application -->
