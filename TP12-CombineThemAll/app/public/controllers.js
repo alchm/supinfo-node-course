@@ -62,7 +62,7 @@ CustomerApp.controller('CustomerCtrl', function($scope, $http) {
         // Clear the `newCustomer` model in the view
         $scope.newCustomer = {};
         // Create a new Customer instance with the given arguments
-        var customerModel = new Customer(1, customer.firstName, customer.lastName, new Date().getTime(), customer.website);
+        var customerModel = new Customer(customer.firstName, customer.lastName, new Date().getTime(), customer.website);
 
         // Send an HTTP POST request to the server
         // It will trigger the /customer route defined in Express router
@@ -71,7 +71,7 @@ CustomerApp.controller('CustomerCtrl', function($scope, $http) {
             .success(function(data, status, headers) {
                 console.log('Received data from POST /customer : ', data);
                 // Push the created Customer instance to the scope customers array
-                $scope.customers.push(customerModel);
+                $scope.customers.push(data);
             })
             .error(function(data, status, headers) {
                 // Error ...

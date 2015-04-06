@@ -26,6 +26,11 @@ app.use(bodyParser.json());
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/customers');
 var db = mongoose.connection;
+// Managing auto incrementation in mongoose is kind of hard, but hopefully there is a plugin for that
+var mongooseAutoIncrement = require('mongoose-auto-increment');
+// It needs to be initialized with the current connection
+// Then you just need to plug it in your models (see the models/ files)
+mongooseAutoIncrement.initialize(db);
 
 // MongoDB/Mongoose logs
 db.on('error', function() { console.log(' MongoDB -> '.black.bgRed+' connection error to customers@localhost'.red); });
